@@ -21,27 +21,10 @@
     </div>
   </div>
 </nav>
-<!-- FORM SEARCH  -->
 
- <div class="form"> 
-  <form class="d-flex">
-        <input class="form-control mt-3 me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success mt-3 mx-auto" type="submit">Search</button>
-      </form>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-  <label class="form-check-label" for="flexCheckChecked">
-    Checked checkbox
-  </label>
-  
-</div>
-</div> 
+<HomePage v-if="page ==='recipes'" />
+<AddRecipe v-if="page ==='add'" />
+<LogIn v-if="page ==='log'" />
 
 </div>
 
@@ -49,11 +32,22 @@
 </template>
 
 <script>
-
+ import HomePage from "./components/HomePage";
+ import AddRecipe from "./components/AddRecipe";
+ import LogIn from "./components/LogIn";
 
 export default {
+ 
   name: 'App',
+  
+  data: function(){
+    return{
+      "page":"log"
+
+    }
+  },
   components: {
+    HomePage,AddRecipe,LogIn
     
   }
 }
@@ -64,6 +58,7 @@ export default {
   width: 15%;
   height:100vh;
   background-color:rgb(254, 250, 250);
+  position: absolute;
   
 }
 .search-icon{
