@@ -1,5 +1,6 @@
 <template>
  <div>
+   
 <h1 class="recipes">Add Recipe</h1>
   </div>
 </template>
@@ -9,7 +10,10 @@ export default {
   name: 'AddRecipe',
   props: {
     msg: String
-  }
+  },
+   components: {
+
+  },
 }
 </script>
 

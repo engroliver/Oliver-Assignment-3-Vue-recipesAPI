@@ -22,16 +22,27 @@
   
 </div>
 </div> 
-<h1 class="recipes">ALL RECIPES</h1>
+
+<!-- card Grid Recipes -->
+
   </div>
 </template>
 
+
 <script>
+
+
 export default {
   name: 'HomePage',
   props: {
     msg: String
-  }
+  },
+  components: {
+
+    
+  },
+  
+  
 }
 </script>
 
