@@ -2,10 +2,10 @@
 <div>
 
 
-<NavBar v-if="page ==='recipes'|| page ==='add'" v-on:AddPage="selectPage('add')" v-on:mainPage="selectPage('recipes')" />
-<HomePage  v-if="page ==='recipes'"  />
+<NavBar v-if="page ==='/recipes'|| page ==='add'" v-on:AddPage="selectPage('add')" v-on:mainPage="selectPage('/recipes')" />
+<HomePage  v-if="page ==='/recipes'"  />
 <AddRecipe v-if="page ==='add'"  />
-<LogIn v-if="page ==='log'" v-on:changePage="selectPage('recipes')"/>
+<LogIn v-if="page ==='log'" v-on:changePage="selectPage('/recipes')"/>
 
  
 </div>

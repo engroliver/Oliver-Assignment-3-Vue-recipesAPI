@@ -24,24 +24,38 @@
 </div> 
 
 <!-- card Grid Recipes -->
-
+<ul>
+  <li v-for=" r  in this.recipes" v-bind:key="r._id"/>
+  
+</ul>
   </div>
 </template>
 
 
 <script>
 
+import axios from 'axios'
+const baseAPIUrl ="http://localhost:3000"
 
 export default {
   name: 'HomePage',
   props: {
     msg: String
   },
+  data:function() {
+    return{
+      recipes:[]
+    }
+  },
   components: {
 
     
   },
   
+  async created() {
+    const response = await axios.get(baseAPIUrl +'/recipes')
+    this.recipes = response.data;
+  }
   
 }
 </script>
