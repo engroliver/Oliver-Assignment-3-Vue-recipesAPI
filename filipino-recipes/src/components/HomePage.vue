@@ -3,31 +3,22 @@
 
 <!-- FORM SEARCH  -->
 
- <div class="form"> 
-  <form class="d-flex">
-        <input class="form-control mt-3 me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success mt-3 mx-auto" type="submit">Search</button>
-      </form>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-  <label class="form-check-label" for="flexCheckChecked">
-    Checked checkbox
-  </label>
-  
-</div>
-</div> 
+
 
 <!-- card Grid Recipes -->
-<ul>
-  <li v-for=" r  in this.recipes" v-bind:key="r._id"/>
-  
-</ul>
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-3" >
+  <div class="col"  v-for=" r  in this.recipes" v-bind:key="r._id">
+    <div class="card">
+      <div class="card-body"  >
+         <h5 class="card-title">{{r.title}}</h5>
+         <p class="card-text">{{r.description}}</p>
+         <button class="btn btn-success"  v-on:click="show">show</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   </div>
 </template>
 
@@ -37,6 +28,7 @@
 import axios from 'axios'
 const baseAPIUrl ="http://localhost:3000"
 
+
 export default {
   name: 'HomePage',
   props: {
@@ -44,16 +36,20 @@ export default {
   },
   data:function() {
     return{
-      recipes:[]
+      recipes:[],
+      
     }
   },
   components: {
 
     
   },
+  methods: {
+   
+  },
   
   async created() {
-    const response = await axios.get(baseAPIUrl +'/recipes')
+    const response = await axios.get(baseAPIUrl +'/recipes',)
     this.recipes = response.data;
   }
   

@@ -1,49 +1,57 @@
 <template>
  <div class=Log>
-  <h3 class="title"> Lasang Pinoy a taste of Filipino cuisine to try or share </h3><br>
- <!-- Login -->
-  <div class="loginbox" v-bind:style="{display:loginBox}">
-    <h3>Login</h3>
-   <form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email-add">
-  </div>
+  <h3 class="title mb-3"> Lasang Pinoy a taste of Filipino cuisine to try or share </h3><br>
+  <div class="row  mx-auto text-center loginbox " v-bind:style="{display:loginBox}">
+  <div id="share" class="container">
+  <div class="row mx-auto">
+    <form class="text-center p-10">
+      <h2 >LOGIN</h2>
+    <div class="mb-3">
+      <label  class="form-label">Username</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username" v-model="userName">
+    </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" placeholder="password" id="exampleInputPassword1">
+    <input type="password" class="form-control" placeholder="password" id="exampleInputPassword1" v-model="password">
   </div>
- 
-  <button type="submit" class="btn btn-success logBtn" v-on:click="newPage">Login</button>
+  <button type="submit" class="btn btn-success logBtn" v-on:click="loginData">Login</button>
   <!-- footer -->
   <div class=footer>
-
     <span>Not a member yet? <button type="button" class="btn btn-outline-success btn-sm" v-on:click="signPage">SignUp</button></span><br>
-   <span>Forgotten password? <a href="#">Reset password</a></span><br>
-
-  </div>
-</form>
-
-  </div>
+    <span>Forgotten password? <a href="#">Reset password</a></span><br>
+  </div>  
+    
+     
+      </form>
+      </div>
+   </div>
+</div> 
 <!-- Sign Up form -->
-  <div class="SignupBox" v-bind:style="{display:SignBox}" >
-    <form>
-      <h3>Create your account</h3>
+  <div class="row  mx-auto text-center SignupBox" v-bind:style="{display:SignBox}" >
+    <div class="container">
+    <div class="row mx-auto">
+    <form class="text-center p-10">
       <button type="button" class="btn-close closeBtn" aria-label="Close" v-on:click="close"></button>
+      <h3>Create your account</h3>
       <input type="text" class="form-control mt-1"  placeholder="First name">
       <input type="text" class="form-control mt-2"  placeholder="Surname">
       <input type="email" class="form-control mt-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email-add">
       <input type="date" class="form-control mt-2">
       <input type="text" class="form-control mt-2"  placeholder="Username">
       <input type="text" class="form-control mt-2"  placeholder="Password">
-      <button type="submit" class="btn btn-success signBtn" v-on:click="close" >Sign up</button>
+      <button type="submit" class="btn btn-success signBtn " v-on:click="close" >Sign up</button>
     </form>
+    </div>
+    </div>
   </div>
 
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+const baseAPIUrl ="http://localhost:3000"
+
 export default {
   name: 'LogIn',
   props: {
@@ -52,7 +60,9 @@ export default {
   data: function(){
     return{
       loginBox:"",
-      SignBox:"none"
+      SignBox:"none",
+      userName:"",
+      password:""
     }
   },
   methods: {
@@ -66,8 +76,21 @@ export default {
     close(){
       this.loginBox=""
       this.SignBox="none"
-    }
+    },
     
+    async loginData() {
+        const loginAccount={
+
+      username:this.userName,
+      password:this.password,
+      
+    };
+    let accountData = await axios.post(baseAPIUrl+'/login',loginAccount)
+    console.log(accountData,"my account")
+      if(accountData){
+         this.$emit("changePage")
+      }
+    }
   },
 }
 </script>
@@ -81,8 +104,9 @@ export default {
 background-image: url("../assets/LogBG.jpg");
 height:100vh;
 background-size: cover;
-display: flex;
-position: relative;
+background-position: center;
+background-repeat: no-repeat;
+
 }
 .loginbox{
   border-radius: 25px;
@@ -91,9 +115,8 @@ position: relative;
   width: 350px;
   height: 450px;
   background-color:white;
-  position: absolute;
-  margin-top: 8%;
-  margin-left: 38%;
+  
+
   border-width: 5px;
   text-align: center;
   font-family: 'Oswald', sans-serif;
@@ -138,22 +161,18 @@ position: relative;
   border: 2px solid rgb(17, 97, 73);
   padding: 20px;
   width: 350px;
-  height: 450px;
+  height: 475px;
   background-color:white;
-  position: absolute;
-  margin-top: 8%;
-  margin-left: 38%;
   border-width: 5px;
   text-align: center;
   font-family: 'Oswald', sans-serif;
  
 }
 .closeBtn{
-  position: absolute;
   top:0;
-  margin-top: 10px;
+  position: relative;
   font-size: 20px;  
-  right: 14px;
+  margin-left: 250px;
 }
 #regtitle{
  

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-toasted": "^1.0.6",
+    "vue-toastr": "^2.1.2"
+  }
+}

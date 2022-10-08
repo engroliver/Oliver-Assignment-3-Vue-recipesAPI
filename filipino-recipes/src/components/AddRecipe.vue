@@ -9,60 +9,62 @@
           <div class="mb-2">
             <div class="errordiv"></div>
               <label  class="form-label">Title</label>
-              <input id="name" type="text" class="form-control form-control-sm" >
+              <input id="name" type="text" class="form-control form-control-sm" v-model="title" >
             </div>
             <div class="mb-2">
               <label  class="form-label">Description (optional)</label>
-              <textarea class="form-control form-control-sm" id="discription" rows="3"></textarea>
-            </div>  
+              <textarea class="form-control form-control-sm" id="discription" rows="3" v-model="description"></textarea>
+            </div> 
+            <div class="mb-2">
+            <div class="errordiv"></div>
+              <label  class="form-label">Course</label>
+              <input id="course" type="text" class="form-control form-control-sm" v-model="course" >
+            </div>
             <div class="errordiv"></div>
               <div class="mb-2">
               <label  class="form-label">Ingredients</label>
-              <textarea id="Ingredients" type="text" class="form-control form-control-sm" rows="3" ></textarea>
+              <textarea id="ingredients" placeholder="enter the ingredients seperated by a comma ex.(milk,flour,sugar)" type="text" class="form-control form-control-sm" rows="3" v-model="ingredients"></textarea>
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Instructions</label>
-              <textarea id="Instruction" type="text" class="form-control form-control-sm" rows="3" ></textarea>
+              <textarea id="Instruction" type="text" placeholder="enter instruction step by step seprated by comma"  class="form-control form-control-sm" rows="3" v-model="instructions" ></textarea>
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Nutrition Facts</label>
-              <input id="nutriFacts" type="text" class="form-control form-control-sm" >
+              <input id="nutriFacts" type="text" class="form-control form-control-sm" v-model="nutriFacts" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Prep Time</label>
-              <input id="prep_time" type="text" class="form-control form-control-sm" >
+              <input id="prep_time" type="text" class="form-control form-control-sm" v-model="prepTime" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Cook time</label>
-              <input id="cook_time" type="text" class="form-control form-control-sm" >
+              <input id="cook_time" type="text" class="form-control form-control-sm" v-model="cookTime" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Total time</label>
-              <input id="total_time" type="text" class="form-control form-control-sm" >
+              <input id="total_time" type="text" class="form-control form-control-sm" v-model="totalTime" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Servings</label>
-              <input id="servings" type="number" min="1" max="100" class="form-control form-control-sm" >
+              <input id="servings" type="number" min="1" max="100" class="form-control form-control-sm" v-model="servings" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Cost</label>
-              <input id="cost" min="1" type="text" class="form-control form-control-sm" >
+              <input id="cost" min="1" type="number" class="form-control form-control-sm" v-model="cost" >
             </div>
             <div class="mb-2">
               <label class="form-label">Upload Image</label>
               <input class="form-control form-control-sm" type="file">
             </div>
-            <button class=" btn btn-success  shareBtn mt-3  "> SHARE</button>
-      
-    
-     
+            <button class=" btn btn-success  shareBtn mt-3  " v-on:click="addToDataBase"> SHARE</button>
       </form>
       </div>
    </div>
@@ -73,22 +75,71 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+const baseAPIUrl ="http://localhost:3000"
+
 export default {
   name: 'AddRecipe',
   props: {
     msg: String
   },
-   components: {
+  data:function(){
+    return{
+      title:"",
+      description:"",
+      course:"",
+      ingredients:"",
+      instructions:"",
+      nutriFacts:"",
+      prepTime:"",
+      cookTime:"",
+      totalTime:"",
+      servings:Number(""),
+      cost: Number(""),
+
+    }
 
   },
+  components: {
+
+  },
+  methods:{
+  async addToDataBase(){
+
+    const addRecipeData ={
+      title: this.title,
+      description: this.description,
+      course: this.course,
+      ingredients: this.ingredients.split(",").map((i) => i.trim()),
+      instructions: this.instructions.split(",").map((i) => i.trim()),
+      nutrition_facts:this.nutriFacts.split(",").map((i) => i.trim()),
+      prep_time:this.prepTime,
+      cook_time:this.cookTime,
+      total_time:this.totalTime,
+      servings:this.servings,
+      cost: this.cost,
+      
+    };
+    try{
+    await axios.post(baseAPIUrl+'/recipes/add',addRecipeData)
+    }catch(e){
+        alert("Failed to share Recipe")
+    }this.$emit("Recipe-added")
+    this.$toastr.s("SUCCESS MESSAGE", "Success Toast Title");
+
+  }
+  }
+
 }
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 #share{
-  max-width: 700px;
+  max-width: 600px;
   font-family: 'Oswald', sans-serif;
   font-weight:bold;
   border-radius:25px;
