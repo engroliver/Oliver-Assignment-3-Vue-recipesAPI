@@ -1,24 +1,23 @@
 <template>
 <div>
-
-
-<NavBar v-if="page ==='/recipes'|| page ==='add'" v-on:AddPage="selectPage('add')" v-on:mainPage="selectPage('/recipes')" />
-<HomePage  v-if="page ==='/recipes'"  />
+<NavBar v-if="page ==='/recipes'|| page ==='add' || page === 'detail' "  v-on:AddPage="selectPage('add')" v-on:mainPage="selectPage('/recipes')" />
+<HomePage  v-if="page ==='/recipes'"   v-on:showDetail="showRecipe"/>
 <AddRecipe v-if="page ==='add'" v-on:Recipe-added="selectPage('/recipes')" />
 <LogIn v-if="page ==='log'" v-on:changePage="selectPage('/recipes')"/>
-<RecipeDetail v-on:showInfo="modal"/>
- 
+<RecipeDetail v-if="page ==='detail'" v-on:closeDetail="selectPage('/recipes')"  v-bind:recipeId="recipeBeingShow"/>
+
 </div>
 
 
 </template>
 
 <script>
- import HomePage from "./components/HomePage";
- import AddRecipe from "./components/AddRecipe";
- import LogIn from "./components/LogIn";
- import NavBar from "./components/NavBar";
- import RecipeDetail from "./components/RecipeDetail.vue" 
+import RecipeDetail from "./components/RecipeDetail.vue"
+import NavBar from "./components/NavBar.vue"
+import HomePage from "./components/HomePage";
+import AddRecipe from "./components/AddRecipe";
+import LogIn from "./components/LogIn";
+ 
 
 export default {
  
@@ -26,8 +25,8 @@ export default {
   
   data: function(){
     return{
-      "page":"log"
-
+      "page":"log",
+      recipeBeingShow: 0
     }
   },
   components: {
@@ -38,7 +37,12 @@ export default {
   methods: {
     selectPage(turnPage){
       this.page = turnPage;
+    },
+    showRecipe(recipeId) {
+      this.recipeBeingShow = recipeId
+      this.selectPage("detail");
     }
+
   }
 }
 </script>

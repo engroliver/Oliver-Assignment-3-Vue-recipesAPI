@@ -14,7 +14,7 @@
     <label for="exampleInputPassword1" class="form-label">Password</label>
     <input type="password" class="form-control" placeholder="password" id="exampleInputPassword1" v-model="password">
   </div>
-  <button type="submit" class="btn btn-success logBtn" v-on:click="loginData">Login</button>
+  <router-link to="/recipes"><button type="submit" class="btn btn-success logBtn" v-on:click="loginData">Login</button></router-link>
   <!-- footer -->
   <div class=footer>
     <span>Not a member yet? <button type="button" class="btn btn-outline-success btn-sm" v-on:click="signPage">SignUp</button></span><br>
@@ -44,7 +44,6 @@
     </div>
     </div>
   </div>
-
   </div>
 </template>
 

@@ -102,7 +102,7 @@ export default {
 
   },
   components: {
-
+    
   },
   methods:{
   async addToDataBase(){

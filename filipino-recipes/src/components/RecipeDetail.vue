@@ -1,22 +1,30 @@
 <template>
-<div>
-<!-- Vertically centered scrollable modal -->
-<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content" v-for=" r  in this.recipes" v-bind:key="r._id">>
-      <div class="modal-header">
-        <h5 class="modal-title">{{r.title}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>{{r.description}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<div >
+    <div class="row  mx-auto text-center detailForm "  >
+    <div class="container DetailBox mt-2">
+    <div class="row mx-auto">
+    <form class="text-center p-10" >
+      <router-link to="/recipe"><button type="button" class="btn-close closeBtn" aria-label="Close" v-on:click="close"></button></router-link>
+      <h3 class="p-2 bg-light border">{{recipe.title}}</h3>
+      <p>{{recipe.description}}</p>
+      <ul class="list-group mb-3"  >
+      <h3 class="p-2 bg-light border">Ingredients</h3>
+  <li class="list-group-item " v-for="(ingredients, index) in recipe.ingredients" v-bind:key="index">{{ingredients}}</li>
+      </ul>
+      <h3 class="p-2 bg-light border">Instructions</h3>
+    <ul class="list-group mb-3" >
+  <li class="list-group-item " v-for="(instructions, index) in recipe.instructions" v-bind:key="index">{{instructions}}</li>
+      </ul>
+      <h3 class="p-2 bg-light border ">Nutrition Facts</h3>
+      <p>{{recipe.nutrition_facts}}</p>
+      <p>prep time:{{recipe.prep_time}}</p>
+      <p>Total time:{{recipe.total_time}}</p>
+      <p>Servings:{{recipe.servings}}</p>
+      <p>Cost:{{recipe.cost}}</p>
+    </form>
     </div>
-
-</div>
+    </div>
+  </div>
 
 </div>
 </template>
@@ -26,26 +34,55 @@ const baseAPIUrl ="http://localhost:3000"
 
 export default {
 name:'RecipeDetail',
-props:{
-    msg:String
-},
+props:["recipeId"],
+  async created() {
+    const response = await axios.get(baseAPIUrl +'/recipes/' + this.recipeId ,)
+    this.recipe = response.data;
+  },
 data:function(){
     return{
-        recipes:[]
+        recipe:{},
+        
+       
     }
 },
 components:{
 
 },
 methods: {
-      async created() {
-    const response = await axios.get(baseAPIUrl +'/recipes',)
-    this.recipes = response.data;
+  async process() {
+
   }
 },
+
     
 }
 </script>
 <style scoped>
-
+.DetailBox{
+  max-width: 700px;
+  max-height: 100vh;
+  font-family: 'Oswald', sans-serif;
+  font-weight:bold;
+  border-radius:25px;
+  border: 2px solid rgb(17, 97, 73);
+  font-size: 1.2rem;
+  background-color:white ;
+  justify-content: center;
+  overflow: scroll
+  
+ 
+}
+.closeBtn{
+  top:0;
+  position: relative;
+  font-size: 30px;  
+  margin-left: 90%;
+}
+.detailForm{
+  background-image: url("../assets/reBG.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+}
 </style>

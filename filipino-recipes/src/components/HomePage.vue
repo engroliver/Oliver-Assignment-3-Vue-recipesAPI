@@ -12,12 +12,12 @@
       <div class="card-body"  >
          <h5 class="card-title">{{r.title}}</h5>
          <p class="card-text">{{r.description}}</p>
-         <button class="btn btn-success"  v-on:click="show">show</button>
+        <router-link to="/Rdetail"> <button  class="btn btn-success"  v-on:click="showDetailRecipe(r._id)">show</button></router-link>
       </div>
     </div>
   </div>
 </div>
-
+<!-- modal -->
 
   </div>
 </template>
@@ -45,6 +45,9 @@ export default {
     
   },
   methods: {
+    showDetailRecipe(recipeId){
+      this.$emit("showDetail",recipeId)
+    }
    
   },
   

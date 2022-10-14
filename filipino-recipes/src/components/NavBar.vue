@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active navLink" aria-current="page" href="#" v-on:click="homePage">Home</a>
+          <router-link to='/recipes'><a class="nav-link active navLink" aria-current="page" href="#" v-on:click="homePage">Home</a></router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#" v-on:click="addPage">Addrecipe</a>
+          <router-link to='/add'><a class="nav-link active" href="#" v-on:click="addPage">Addrecipe</a></router-link>
         </li>
           
       </ul>
