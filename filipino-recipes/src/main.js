@@ -29,7 +29,7 @@ const router = createRouter({
             component: AddRecipe
         },
         {
-            path: '/Rdetail',
+            path: '/Rdetail/:recipeId' ,
             name: 'RecipeDetail',
             component: RecipeDetail
         },

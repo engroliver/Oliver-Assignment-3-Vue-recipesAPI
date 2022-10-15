@@ -62,7 +62,9 @@
             </div>
             <div class="mb-2">
               <label class="form-label">Upload Image</label>
-              <input class="form-control form-control-sm" type="file">
+              <Uploadcare publicKey="0776c9a63bf7b1c0aca0" v-on:success="addToDataBase">
+              <button></button>
+              </Uploadcare>
             </div>
             <button class=" btn btn-success  shareBtn mt-3  " v-on:click="addToDataBase"> SHARE</button>
       </form>
@@ -77,6 +79,8 @@
 <script>
 
 import axios from 'axios'
+import Uploadcare from "uploadcare-vue";
+
 const baseAPIUrl ="http://localhost:3000"
 
 export default {
@@ -97,15 +101,15 @@ export default {
       totalTime:"",
       servings:Number(""),
       cost: Number(""),
-
+      
     }
 
   },
-  components: {
+  components: {Uploadcare
     
   },
   methods:{
-  async addToDataBase(){
+  async addToDataBase(params){
 
     const addRecipeData ={
       title: this.title,
@@ -119,7 +123,8 @@ export default {
       total_time:this.totalTime,
       servings:this.servings,
       cost: this.cost,
-      
+      name:params.name,
+      url:params.cdnUrl
     };
     try{
     await axios.post(baseAPIUrl+'/recipes/add',addRecipeData)

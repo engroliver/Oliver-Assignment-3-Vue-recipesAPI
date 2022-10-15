@@ -4,7 +4,7 @@
     <div class="container DetailBox mt-2">
     <div class="row mx-auto">
     <form class="text-center p-10" >
-      <router-link to="/recipe"><button type="button" class="btn-close closeBtn" aria-label="Close" v-on:click="close"></button></router-link>
+      <router-link to="/recipes"><button type="button" class="btn-close closeBtn" aria-label="Close" v-on:click="close"></button></router-link>
       <h3 class="p-2 bg-light border">{{recipe.title}}</h3>
       <p>{{recipe.description}}</p>
       <ul class="list-group mb-3"  >
@@ -49,7 +49,12 @@ data:function(){
 components:{
 
 },
+ 
+
 methods: {
+    close(){
+      this.$emit("closeDetail")
+    },
   async process() {
 
   }

@@ -4,7 +4,7 @@
 <HomePage  v-if="page ==='/recipes'"   v-on:showDetail="showRecipe"/>
 <AddRecipe v-if="page ==='add'" v-on:Recipe-added="selectPage('/recipes')" />
 <LogIn v-if="page ==='log'" v-on:changePage="selectPage('/recipes')"/>
-<RecipeDetail v-if="page ==='detail'" v-on:closeDetail="selectPage('/recipes')"  v-bind:recipeId="recipeBeingShow"/>
+<RecipeDetail v-if="page ==='detail'" v-on:closeDetail="selectPage('/recipes')"  v-bind:recipeId="recipeBeingShow" />
 
 </div>
 
