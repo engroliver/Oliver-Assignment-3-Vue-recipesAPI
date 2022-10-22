@@ -8,6 +8,7 @@ import HomePage from './components/HomePage.vue'
 import AddRecipe from './components/AddRecipe.vue'
 import LogIn from './components/LogIn.vue'
 import RecipeDetail from './components/RecipeDetail'
+import EditRecipe from './components/EditRecipe'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -32,6 +33,11 @@ const router = createRouter({
             path: '/Rdetail/:recipeId' ,
             name: 'RecipeDetail',
             component: RecipeDetail
+        },
+        {
+            path: '/RecipeEdit/:recipeId',
+            name: 'RecipeEdit',
+            component: EditRecipe
         },
         
         

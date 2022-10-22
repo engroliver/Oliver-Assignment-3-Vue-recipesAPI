@@ -5,11 +5,11 @@
    <div id="share" class="container mt-3">
       <div class="row my-5 mx-auto">
       <form class="text-center p-10">
-        <h2 class="shareTitle">SHARE YOUR OWN RECIPE</h2>
+        <h2 class="shareTitle">UPDATE RECIPE</h2>
           <div class="mb-2">
             <div class="errordiv"></div>
               <label  class="form-label">Title</label>
-              <input id="name" type="text" class="form-control form-control-sm" v-model="title" >
+              <input id="name" type="text" class="form-control form-control-sm" v-model="recipe.title" >
             </div>
             <div class="mb-2">
               <label  class="form-label">Description</label>
@@ -66,7 +66,7 @@
               <button class="btn btn-success "></button>
               <!-- </Uploadcare> -->
             </div>
-            <button class=" btn btn-success  shareBtn mt-3  " v-on:click="addToDataBase"> SHARE</button>
+            <button class=" btn btn-success  shareBtn mt-3  " v-on:click="UpdateDataBase">UPDATE</button>
       </form>
       </div>
    </div>
@@ -82,33 +82,30 @@ import NavBar from "./NavBar.vue"
 import axios from 'axios'
 const baseAPIUrl ="http://localhost:3000"
 export default {
-  name: 'AddRecipe',
+  name: 'EditRecipe',
   props: {
     msg: String
   },
   data:function(){
     return{
-      title:"",
-      description:"",
-      course:"",
-      ingredients:"",
-      instructions:"",
-      nutriFacts:"",
-      prepTime:"",
-      cookTime:"",
-      totalTime:"",
-      servings:Number(""),
-      cost: Number(""),
-      
+    
     }
   },
   components: {NavBar
     
   },
+    async created() {
+    console.log(this.$route.params)
+    console.log(this.recipeId)
+    const recipeId = this.$route.params.recipeId
+    const response = await axios.get(baseAPIUrl +'/recipes/'+ recipeId)
+    this.recipe = response.data;
+        console.log(this.recipe)
+  },
   methods:{
-  async addToDataBase(params){
+  async updateDataBase(params){
     const addRecipeData ={
-      title: this.title,
+      title: this.recipe.title,
       description: this.description,
       course: this.course,
       ingredients: this.ingredients.split(",").map((i) => i.trim()),
@@ -123,14 +120,15 @@ export default {
       url:params.cdnUrl
     };
     try{
-    await axios.post(baseAPIUrl+'/recipes/add',addRecipeData)
+   const response = await axios.put(baseAPIUrl+'/recipes/'+ this.$route.params.recipeId,addRecipeData)
+        this.recipe = response.data
     }catch(e){
         alert("Failed to share Recipe")
     }this.$router.push("/recipes")
   
-  }
   },
-  
+  },
+
 }
 </script>
 

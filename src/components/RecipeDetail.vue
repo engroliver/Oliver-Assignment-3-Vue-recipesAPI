@@ -23,7 +23,7 @@
       <p>Total time:{{recipe.total_time}}</p>
       <p>Servings:{{recipe.servings}}</p>
       <p>Cost:{{recipe.cost}}</p>
-      <button type="button" class="btn btn-primary">EDIT</button> <button type="button" class="btn btn-danger">DELETE</button>
+      <router-link v-bind:to="'/RecipeEdit/' + recipeId " ><button type="button" class="btn btn-primary">EDIT</button></router-link> <button type="button" class="btn btn-danger">DELETE</button>
     </form>
     </div>
     </div>
@@ -32,40 +32,35 @@
 </div>
 </template>
 <script>
-
 import axios from 'axios'
 const baseAPIUrl ="http://localhost:3000"
-
 export default {
 name:'RecipeDetail',
   async created() {
     console.log(this.$route.params)
     console.log(this.recipeId)
-    const response = await axios.get(baseAPIUrl +'/recipes/'+ this.$route.params.recipeId)
+    const recipeId = this.$route.params.recipeId
+    const response = await axios.get(baseAPIUrl +'/recipes/'+ recipeId)
     this.recipe = response.data;
     
   },
 data: function () {
     return{
         recipe:{},
-        recipeNumber: 0
+        
        
     }
 },
 components:{
-
 },
  
-
 methods: {
     close(){
       this.$router.push('/recipes')
     },
   async process() {
-
   }
 },
-
     
 }
 </script>

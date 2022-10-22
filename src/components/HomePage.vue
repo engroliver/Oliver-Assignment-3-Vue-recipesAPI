@@ -64,7 +64,6 @@
 import NavBar from "./NavBar.vue";
 import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
-
 export default {
   name: "HomePage",
   props: {
@@ -76,7 +75,6 @@ export default {
       FoodName: "",
     };
   },
-
   computed: {
     searchResults() {
       return this.recipes.filter((r) =>
@@ -85,11 +83,8 @@ export default {
     },
   },
   components: { NavBar },
-
   methods: {
-
   },
-
   async created() {
     const response = await axios.get(baseAPIUrl + "/recipes");
     this.recipes = response.data;
@@ -113,7 +108,6 @@ export default {
 .searchCol {
   max-width: 250px;
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -127,5 +121,4 @@ export default {
 .card-title{
   font-weight: Bold;
 }
-
 </style>

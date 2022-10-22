@@ -18,9 +18,6 @@
         <li class="nav-item">
           <router-link to='/add'><a class="nav-link active navLink" >Addrecipe</a></router-link>
         </li>
-           
-          
-        
       </ul>
       <router-link to='/'><a class="fa fa-sign-out  SignOut" >Logout</a></router-link>
     </div>
