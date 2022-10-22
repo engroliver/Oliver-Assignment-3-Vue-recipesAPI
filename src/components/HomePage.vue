@@ -1,0 +1,131 @@
+<template>
+  <div>
+    <NavBar />
+    <div class="container-fluid overflow-hidden HomeForm">
+      <div class="row vh-100 overflow-auto">
+        <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-sucess d-flex">
+          <div
+            class="
+              d-flex
+              flex-sm-column flex-row flex-grow-1
+              align-items-center align-items-sm-start
+              px-3
+              pt-2
+            "
+          >
+            <div class="row mx-auto text-center">
+              <div class="container">
+                <div class="row mx-auto">
+                  <form class="text-center p-10">
+                    <h3>Find a Recipe</h3>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control mt-4"
+                        placeholder="Food name"
+                        v-model="FoodName"
+                      />
+                      <button class="btn btn-success btn-sm mt-4" type="button">
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-column h-sm-100">
+          <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+            <div class=" col mt-4" v-for="r in searchResults" v-bind:key="r._id">
+              <div class="card">
+                <div class="card-body">
+                      <h5 class="card-title">{{ r.title }}</h5>
+                    <p class="card-text">{{ r.description }}</p>
+                    <router-link v-bind:to="'/Rdetail/' + r._id">
+                        <button
+                          class="btn btn-success"
+                        >
+                          show
+                        </button></router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FORM SEARCH  -->
+  </div>
+</template>
+
+
+<script>
+import NavBar from "./NavBar.vue";
+import axios from "axios";
+const baseAPIUrl = "http://localhost:3000";
+
+export default {
+  name: "HomePage",
+  props: {
+    msg: String,
+  },
+  data: function () {
+    return {
+      recipes: [],
+      FoodName: "",
+    };
+  },
+
+  computed: {
+    searchResults() {
+      return this.recipes.filter((r) =>
+        r.title.toLowerCase().includes(this.FoodName.toLowerCase())
+      );
+    },
+  },
+  components: { NavBar },
+
+  methods: {
+
+  },
+
+  async created() {
+    const response = await axios.get(baseAPIUrl + "/recipes");
+    this.recipes = response.data;
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+.recipes {
+  margin-left: 16%;
+}
+.form {
+  width: 15%;
+  height: 100vh;
+  background-color: rgb(254, 250, 250);
+  position: absolute;
+}
+.searchCol {
+  max-width: 250px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.HomeForm{
+ font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  justify-content:center ;
+  display: flex;
+}
+.card-title{
+  font-weight: Bold;
+}
+
+</style>
