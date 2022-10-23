@@ -17,7 +17,7 @@
               <div class="container">
                 <div class="row mx-auto">
                   <form class="text-center p-10">
-                    <h3>Find a Recipe</h3>
+                    <h2>FIND A RECIPE</h2>
                     <div class="input-group mb-3">
                       <input
                         type="text"
@@ -29,6 +29,59 @@
                         Search
                       </button>
                     </div>
+                    <div class="input-group mb-3">
+                      <h4>Select Course</h4>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="flexCheckDefault"
+                          v-model="BreakFast"
+                        />
+                        <label class="form-check-label" for="flexCheckDefault">
+                          Breakfast
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="flexCheckChecked"
+                          checked
+                          v-model="MainCourse"
+                        />
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Main Course
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="flexCheckChecked"
+                          checked
+                          v-model="Dessert"
+                        />
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Dessert
+                        </label>
+                      </div>
+                    </div>
+                    <div class="input-group mb-3">
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        v-model="recipe_cost"
+                      >
+                        <option value="" disabled>preferred cost</option>
+                        <option value="250">P250 or lesser</option>
+                        <option value="500">P500 or lesser</option>
+                        <option value="1000">P1000 or lesser</option>
+                      </select>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -37,17 +90,16 @@
         </div>
         <div class="col d-flex flex-column h-sm-100">
           <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
-            <div class=" col mt-4" v-for="r in searchResults" v-bind:key="r._id">
+            <div class="col mt-4" v-for="r in searchResults" v-bind:key="r._id">
               <div class="card">
                 <div class="card-body">
-                      <h5 class="card-title">{{ r.title }}</h5>
-                    <p class="card-text">{{ r.description }}</p>
-                    <router-link v-bind:to="'/Rdetail/' + r._id">
-                        <button
-                          class="btn btn-success"
-                        >
-                          show
-                        </button></router-link>
+                  <h5 class="card-title">{{ r.title }}</h5>
+                  <p class="card-text">{{ r.description }}</p>
+                  <p class="card-text">Course:{{ r.course }}</p>
+                  <p class="card-text">Cost:{{ r.cost }}</p>
+                  <router-link v-bind:to="'/Rdetail/' + r._id">
+                    <button class="btn btn-success">show</button></router-link
+                  >
                 </div>
               </div>
             </div>
@@ -73,30 +125,49 @@ export default {
     return {
       recipes: [],
       FoodName: "",
+      BreakFast: [],
+      MainCourse: [],
+      Dessert: [],
+      recipe_cost: "",
     };
   },
   computed: {
     searchResults() {
-      return this.recipes.filter((r) =>
-        r.title.toLowerCase().includes(this.FoodName.toLowerCase())
-      );
+      return this.recipes.filter(
+        (r) =>
+          r.title.toLowerCase().includes(this.FoodName.toLowerCase()) 
+            
+        );
+      
     },
+    //     searchResults() {
+      
+    //   return this.recipes.filter((r) => {
+    //     if (r.title.toLowerCase().includes(this.FoodName.toLowerCase())) {
+    //       return true;
+    //     } else if (r.cost.includes(parseInt(this.recipe_cost))){
+    //       return true;
+    //     }else{
+    //         return false;
+    //     }
+    //   });
+      
+    // },
   },
   components: { NavBar },
-  methods: {
-  },
+  methods: {},
   async created() {
     const response = await axios.get(baseAPIUrl + "/recipes");
     this.recipes = response.data;
-    console.log(response.data)
+    console.log(response.data);
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 .recipes {
   margin-left: 16%;
 }
@@ -113,13 +184,13 @@ export default {
   margin: 0;
   padding: 0;
 }
-.HomeForm{
- font-family: 'Oswald', sans-serif;
+.HomeForm {
+  font-family: "Oswald", sans-serif;
   font-size: 1.2em;
-  justify-content:center ;
+  justify-content: center;
   display: flex;
 }
-.card-title{
+.card-title {
   font-weight: Bold;
 }
 </style>

@@ -162,17 +162,14 @@ export default {
     },
 
     async loginData(event) {
-      event.preventDefault()
+      event.preventDefault();
       const loginAccount = {
         username: this.userName,
         password: this.password,
-        
       };
       let accountData = await axios.post(baseAPIUrl + "/login", loginAccount);
       console.log(accountData, "my account");
-      if (
-        accountData.data.accessToken
-      ) {
+      if (accountData.data.accessToken) {
         this.$router.push("/recipes");
       }
     },

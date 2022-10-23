@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavBar/>
     <div class="row mx-auto text-center detailForm">
       <div class="container DetailBox mt-2">
         <div class="row mx-auto">
@@ -35,17 +36,18 @@
             </ul>
             <h3 class="p-2 bg-light border">Nutrition Facts</h3>
             <p>{{ recipe.nutrition_facts }}</p>
+            <p>Course:{{ recipe.course }}</p>
             <p>prep time:{{ recipe.prep_time }}</p>
             <p>Total time:{{ recipe.total_time }}</p>
             <p>Servings:{{ recipe.servings }}</p>
             <p>Cost:{{ recipe.cost }}</p>
             <router-link
               v-bind:to="'/RecipeEdit/' + this.$route.params.recipeId"
-              ><button type="button" class="btn btn-primary">
+              ><button type="button" class="btn btn-primary ms-2">
                 EDIT
               </button></router-link
             >
-            <button type="button" class="btn btn-danger" v-on:click="ProcessDelete">DELETE</button>
+            <button type="button" class="btn btn-danger ms-2" v-on:click="ProcessDelete">DELETE</button>
           </form>
         </div>
       </div>
@@ -53,6 +55,7 @@
   </div>
 </template>
 <script>
+import NavBar from "./NavBar.vue"
 import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
 export default {
@@ -69,7 +72,7 @@ export default {
       recipe: {},
     };
   },
-  components: {},
+  components: {NavBar},
 
   methods: {
     close() {
