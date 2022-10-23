@@ -34,4 +34,27 @@ To provide an convenient way to discover, find and monitor their callorie intake
 
 * Login account
 
+## Technologies Used
+1. VueJs 
+    - used to create  front end framework for the single page web app 
 
+2. MongoDb Express 
+    - used to store data for the API
+
+3. [Bootstrap v5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/) 
+    - Used to build and customize the web application by using style/templates and its components     
+
+4. [pexels](https://www.pexels.com/) 
+    - Used for background application of web page 
+
+ 5. Axios 
+    - Used to extract data from mongoDB
+
+ 6. vue-router 
+    - Used to create routes and pages for the web page   
+
+
+### CREDITS
+1. https://panlasangpinoy.com
+
+    -Recipe Source for the project
