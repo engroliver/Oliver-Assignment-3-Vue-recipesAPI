@@ -40,7 +40,7 @@
             <p>prep time:{{ recipe.prep_time }}</p>
             <p>Total time:{{ recipe.total_time }}</p>
             <p>Servings:{{ recipe.servings }}</p>
-            <p>Cost:{{ recipe.cost }}</p>
+            <p>Cost php:{{ recipe.cost }}</p>
             <router-link
               v-bind:to="'/RecipeEdit/' + this.$route.params.recipeId"
               ><button type="button" class="btn btn-primary ms-2">

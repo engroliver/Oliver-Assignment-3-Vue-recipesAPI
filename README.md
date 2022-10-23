@@ -1,4 +1,7 @@
-FILIPINO RECIPES API
+# FILIPINO RECIPES API
+
+<img src='./assets/LasangPinoy.JPG' style="display:block">
+<br>
 
 ## Project Summary
 

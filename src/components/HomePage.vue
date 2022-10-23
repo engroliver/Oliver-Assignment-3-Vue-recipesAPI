@@ -96,7 +96,7 @@
                   <h5 class="card-title">{{ r.title }}</h5>
                   <p class="card-text">{{ r.description }}</p>
                   <p class="card-text">Course:{{ r.course }}</p>
-                  <p class="card-text">Cost:{{ r.cost }}</p>
+                  <p class="card-text">Cost php:{{ r.cost }}</p>
                   <router-link v-bind:to="'/Rdetail/' + r._id">
                     <button class="btn btn-success">show</button></router-link
                   >
