@@ -163,22 +163,22 @@ export default {
   components: { NavBar },
 
   methods: {
-    async UpdateDataBase() {
+    async UpdateDataBase(event) {
+      event.preventDefault();
       const NewRecipeData = {
-        
         title: this.recipe.title,
-        description: this.description,
-        course: this.course,
-        ingredients: this.ingredients.split(",").map((i) => i.trim()),
-        instructions: this.instructions.split(",").map((i) => i.trim()),
-        nutrition_facts: this.nutrition_Facts.split(",").map((i) => i.trim()),
-        prep_time: this.prep_time,
-        cook_time: this.cook_time,
-        total_time: this.total_time,
-        servings: this.servings,
-        cost: this.cost,
+        description: this.recipe.description,
+        course: this.recipe.course,
+        ingredients: toString(this.recipe.ingredients).split(",").map((r) => r.trim()),
+        instructions: toString(this.recipe.instructions).split(",").map((r) => r.trim()),
+        nutrition_facts: toString(this.recipe.nutrition_Facts).split(",").map((r) => r.trim()),
+        prep_time: this.recipe.prep_time,
+        cook_time: this.recipe.cook_time,
+        total_time: this.recipe.total_time,
+        servings: this.recipe.servings,
+        cost: this.recipe.cost,
       };
-      await axios.patch(
+      await axios.put(
         baseAPIUrl + "/recipes/" + this.$route.params.recipeId,
         NewRecipeData
       );
