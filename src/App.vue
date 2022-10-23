@@ -5,7 +5,7 @@ A<template>
 <NavBar v-if="this.$router ==='/recipes' || this.$router === '/add' || this.$router === '/Rdetail/:recipeId'"/>
 <AddRecipe v-if="this.$router === '/add'" />
 <LogIn v-if="this.$router === '/'"/>
- 
+ <EditRecipe v-if="this.$router ==='/RecipeEdit/:recipeId'"/>
 <router-view></router-view>
 </div>
 
@@ -18,6 +18,7 @@ import RecipeDetail from "./components/RecipeDetail.vue"
 import AddRecipe from "./components/AddRecipe";
 import LogIn from "./components/LogIn";
 import NavBar from "./components/NavBar.vue"
+import EditRecipe from "./components/EditRecipe.vue"
 export default {
  
   name: 'App',
@@ -28,7 +29,7 @@ export default {
     }
   },
   components: {
-   HomePage,RecipeDetail,AddRecipe,LogIn,NavBar
+   HomePage,RecipeDetail,AddRecipe,LogIn,NavBar,EditRecipe
   
     
   },

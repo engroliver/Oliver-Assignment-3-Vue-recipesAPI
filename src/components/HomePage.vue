@@ -88,6 +88,7 @@ export default {
   async created() {
     const response = await axios.get(baseAPIUrl + "/recipes");
     this.recipes = response.data;
+    console.log(response.data)
   },
 };
 </script>

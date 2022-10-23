@@ -13,52 +13,52 @@
             </div>
             <div class="mb-2">
               <label  class="form-label">Description</label>
-              <textarea class="form-control form-control-sm" id="discription" rows="3" v-model="description"></textarea>
+              <textarea class="form-control form-control-sm" id="discription" rows="3" v-model="recipe.description"></textarea>
             </div> 
             <div class="mb-2">
             <div class="errordiv"></div>
               <label  class="form-label">Course</label>
-              <input id="course" type="text" class="form-control form-control-sm" v-model="course" >
+              <input id="course" type="text" class="form-control form-control-sm" v-model="recipe.course" >
             </div>
             <div class="errordiv"></div>
               <div class="mb-2">
               <label  class="form-label">Ingredients</label>
-              <textarea id="ingredients" placeholder="enter the ingredients seperated by a comma ex.(milk,flour,sugar)" type="text" class="form-control form-control-sm" rows="3" v-model="ingredients"></textarea>
+              <textarea id="ingredients" placeholder="enter the ingredients seperated by a comma ex.(milk,flour,sugar)" type="text" class="form-control form-control-sm" rows="3" v-model="recipe.ingredients"></textarea>
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Instructions</label>
-              <textarea id="Instruction" type="text" placeholder="enter instruction step by step seprated by comma"  class="form-control form-control-sm" rows="3" v-model="instructions" ></textarea>
+              <textarea id="Instruction" type="text" placeholder="enter instruction step by step seprated by comma"  class="form-control form-control-sm" rows="3" v-model="recipe.instructions" ></textarea>
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Nutrition Facts</label>
-              <input id="nutriFacts" type="text" class="form-control form-control-sm" v-model="nutriFacts" >
+              <input id="nutriFacts" type="text" class="form-control form-control-sm" v-model="recipe.nutrition_facts" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Prep Time</label>
-              <input id="prep_time" type="text" class="form-control form-control-sm" v-model="prepTime" >
+              <input id="prep_time" type="text" class="form-control form-control-sm" v-model="recipe.prep_time" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Cook time</label>
-              <input id="cook_time" type="text" class="form-control form-control-sm" v-model="cookTime" >
+              <input id="cook_time" type="text" class="form-control form-control-sm" v-model="recipe.cook_time" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Total time</label>
-              <input id="total_time" type="text" class="form-control form-control-sm" v-model="totalTime" >
+              <input id="total_time" type="text" class="form-control form-control-sm" v-model="recipe.total_time" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Servings</label>
-              <input id="servings" type="number" min="1" max="100" class="form-control form-control-sm" v-model="servings" >
+              <input id="servings" type="number" min="1" max="100" class="form-control form-control-sm" v-model="recipe.servings" >
             </div>
             <div class="errordiv"></div>
             <div class="mb-2">
               <label  class="form-label">Cost</label>
-              <input id="cost" min="1" type="number" class="form-control form-control-sm" v-model="cost" >
+              <input id="cost" min="1" type="number" class="form-control form-control-sm" v-model="recipe.cost" >
             </div>
             <div class="mb-2">
               <label class="form-label">Upload Image</label>
@@ -66,7 +66,7 @@
               <button class="btn btn-success "></button>
               <!-- </Uploadcare> -->
             </div>
-            <button class=" btn btn-success  shareBtn mt-3  " v-on:click="UpdateDataBase">UPDATE</button>
+            <button class="btn btn-success" v-on:click="UpdateDataBase" >UPDATE</button>
       </form>
       </div>
    </div>
@@ -88,43 +88,36 @@ export default {
   },
   data:function(){
     return{
-    
+      recipe:{}
     }
   },
   components: {NavBar
     
   },
     async created() {
-    console.log(this.$route.params)
-    console.log(this.recipeId)
-    const recipeId = this.$route.params.recipeId
-    const response = await axios.get(baseAPIUrl +'/recipes/'+ recipeId)
+    const response = await axios.get(baseAPIUrl +'/recipes/'+ this.$route.params.recipeId)
     this.recipe = response.data;
-        console.log(this.recipe)
+        console.log(response.data)
   },
   methods:{
-  async updateDataBase(params){
-    const addRecipeData ={
-      title: this.recipe.title,
+  async UpdateDataBase(params){
+    const NewRecipeData ={
+      title:this.recipe.title,
       description: this.description,
       course: this.course,
       ingredients: this.ingredients.split(",").map((i) => i.trim()),
       instructions: this.instructions.split(",").map((i) => i.trim()),
-      nutrition_facts:this.nutriFacts.split(",").map((i) => i.trim()),
-      prep_time:this.prepTime,
-      cook_time:this.cookTime,
-      total_time:this.totalTime,
+      nutrition_facts:this.nutrition_Facts.split(",").map((i) => i.trim()),
+      prep_time:this.prep_time,
+      cook_time:this.cook_time,
+      total_time:this.total_time,
       servings:this.servings,
       cost: this.cost,
       name:params.name,
       url:params.cdnUrl
     };
-    try{
-   const response = await axios.put(baseAPIUrl+'/recipes/'+ this.$route.params.recipeId,addRecipeData)
-        this.recipe = response.data
-    }catch(e){
-        alert("Failed to share Recipe")
-    }this.$router.push("/recipes")
+   await axios.put(baseAPIUrl+'/recipes/'+ this.$route.params.recipeId,NewRecipeData)
+    this.$router.push("/recipes")
   
   },
   },
