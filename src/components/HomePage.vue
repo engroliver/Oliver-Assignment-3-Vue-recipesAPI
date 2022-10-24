@@ -125,34 +125,35 @@ export default {
     return {
       recipes: [],
       FoodName: "",
-      BreakFast: [],
-      MainCourse: [],
-      Dessert: [],
+      BreakFast: "BreakFast",
+      MainCourse: "Main Course",
+      Dessert: "Dessert",
       recipe_cost: "",
     };
   },
   computed: {
-    searchResults() {
-      return this.recipes.filter(
-        (r) =>
-          r.title.toLowerCase().includes(this.FoodName.toLowerCase()) 
+    // searchResults() {
+    //   return this.recipes.filter(
+    //     (r) =>
+    //       r.title.toLowerCase().includes(this.FoodName.toLowerCase()) 
             
-        );
-      
-    },
-    //     searchResults() {
-      
-    //   return this.recipes.filter((r) => {
-    //     if (r.title.toLowerCase().includes(this.FoodName.toLowerCase())) {
-    //       return true;
-    //     } else if (r.cost.includes(parseInt(this.recipe_cost))){
-    //       return true;
-    //     }else{
-    //         return false;
-    //     }
-    //   });
+    //     );
       
     // },
+        searchResults() {
+      
+      return this.recipes.filter((r) => {
+        if (r.title.toLowerCase().includes(this.FoodName.toLowerCase())) {
+          return true;
+        } 
+        if (r.cost <= this.recipe_cost){
+          return true;
+        }else{
+            return false;
+        }
+      });
+      
+    },
   },
   components: { NavBar },
   methods: {},

@@ -62,73 +62,12 @@
       </div>
     </div>
     <!-- Sign Up form -->
-    <div
-      class="row mx-auto text-center SignupBox"
-      v-bind:style="{ display: SignBox }"
-    >
-      <div class="container">
-        <div class="row mx-auto">
-          <form class="text-center p-10">
-            <button
-              type="button"
-              class="btn-close closeBtn"
-              aria-label="Close"
-              v-on:click="close"
-            ></button>
-            <h3>Create your account</h3>
-            <input
-              type="text"
-              class="form-control mt-1"
-              v-model="FirstName"
-              placeholder="First name"
-            />
-            <input
-              type="text"
-              class="form-control mt-2"
-              v-model="SurName"
-              placeholder="Surname"
-            />
-            <input
-              type="email"
-              class="form-control mt-2"
-              v-model="email"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="email-add"
-            />
-            <input
-              type="date"
-              class="form-control mt-2"
-              data-date-format="yyyy-mm-dd"
-              v-model="BirthDate"
-            />
-            <input
-              type="text"
-              class="form-control mt-2"
-              v-model="UserNameSignup"
-              placeholder="Username"
-            />
-            <input
-              type="password"
-              class="form-control mt-2"
-              v-model="PasswordSignup"
-              placeholder="Password"
-            />
-            <button
-              type="submit"
-              class="btn btn-success signBtn"
-              v-on:click="RegisterAccount"
-            >
-              Sign up
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <SignUp v-if="SignBox ==='on'" v-on:closeSignUpBox = "close"/>
   </div>
 </template>
 
 <script>
+import SignUp from "./SignUp.vue"
 import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
 
@@ -139,27 +78,26 @@ export default {
   },
   data: function () {
     return {
-      loginBox: "",
-      SignBox: "none",
+      loginBox:"",
       userName: "",
       password: "",
-      FirstName: "",
-      SurName: "",
-      email: "",
-      BirthDate: "",
-      UserNameSignup: "",
-      PasswordSignup: "",
+      "SignBox":"off",
     };
+  },
+    components: {
+  SignUp
+   
   },
   methods: {
     signPage() {
+      this.SignBox = "on";
       this.loginBox = "none";
-      this.SignBox = "";
     },
-    close() {
+    close (){
+        this.SignBox = "";
       this.loginBox = "";
-      this.SignBox = "none";
     },
+  
 
     async loginData(event) {
       event.preventDefault();
@@ -174,21 +112,7 @@ export default {
       }
     },
 
-    async RegisterAccount() {
-      const addAcount = {
-        email: this.email,
-        name: this.FirstName,
-        lastname: this.SurName,
-        birthday: this.BirthDate,
-        username: this.UserNameSignup,
-        password: this.PasswordSignup,
-      };
-      try {
-        await axios.post(baseAPIUrl + "/register", addAcount);
-      } catch (e) {
-        alert("Registration Failed");
-      }
-    },
+
   },
 };
 </script>
