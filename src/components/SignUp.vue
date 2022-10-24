@@ -2,8 +2,9 @@
 <div>
     <!-- Sign Up form -->
     <div
+   
       class="row mx-auto text-center SignupBox"
-      v-bind:style="{ display: SignBox }"
+       v-bind:style="{fontFamily:fontstyle}"
     >
       <div class="container">
         <div class="row mx-auto">
@@ -74,7 +75,7 @@ const baseAPIUrl = "http://localhost:3000";
 export default {
     
   name: "SignUp",
-  props: [],
+  props: ["fontstyle"],
   data: function () {
     return {
       userName: "",
@@ -116,43 +117,8 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 
-.Log {
-  background-image: url("../assets/LogBG.jpg");
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.loginbox {
-  border-radius: 25px;
-  border: 2px solid rgb(17, 97, 73);
-  padding: 20px;
-  width: 350px;
-  height: 450px;
-  background-color: white;
 
-  border-width: 5px;
-  text-align: center;
-  font-family: "Oswald", sans-serif;
-}
-.title {
-  color: white;
-  text-shadow: 5px 5px 5px black;
-  display: flex;
-  position: relative;
-  font-size: 3em;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-family: "Recursive", sans-serif;
-}
-.logBtn {
-  padding: 1em;
-  border: none;
-  border-radius: 30px;
-  font-weight: 600;
-  width: 250px;
-  margin-top: 20px;
-}
+
 .signBtn {
   padding: 1em;
   border: none;
@@ -175,7 +141,6 @@ export default {
   background-color: white;
   border-width: 5px;
   text-align: center;
-  font-family: "Oswald", sans-serif;
 }
 .closeBtn {
   top: 0;
@@ -183,8 +148,5 @@ export default {
   font-size: 20px;
   margin-left: 250px;
 }
-#regtitle {
-  position: relative;
-  font-size: 1rem;
-}
+
 </style>

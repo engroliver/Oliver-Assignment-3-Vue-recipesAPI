@@ -6,7 +6,7 @@
     <br />
     <div
       class="row mx-auto text-center loginbox"
-      v-bind:style="{ display: loginBox }"
+      v-bind:style="{ display: loginBox , fontFamily:font}"
     >
       <div id="share" class="container">
         <div class="row mx-auto">
@@ -62,7 +62,7 @@
       </div>
     </div>
     <!-- Sign Up form -->
-    <SignUp v-if="SignBox ==='on'" v-on:closeSignUpBox = "close"/>
+    <SignUp v-if="SignBox ==='on'" v-on:closeSignUpBox = "close" v-bind:fontstyle="font"/>
   </div>
 </template>
 
@@ -81,7 +81,8 @@ export default {
       loginBox:"",
       userName: "",
       password: "",
-      "SignBox":"off",
+      "SignBox":"",
+      font:'"Oswald", sans-serif'
     };
   },
     components: {
@@ -136,10 +137,9 @@ export default {
   width: 350px;
   height: 450px;
   background-color: white;
-
   border-width: 5px;
   text-align: center;
-  font-family: "Oswald", sans-serif;
+ 
 }
 .title {
   color: white;
@@ -189,8 +189,5 @@ export default {
   font-size: 20px;
   margin-left: 250px;
 }
-#regtitle {
-  position: relative;
-  font-size: 1rem;
-}
+
 </style>
