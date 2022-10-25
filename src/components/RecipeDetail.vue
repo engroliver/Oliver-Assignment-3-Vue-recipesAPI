@@ -2,7 +2,7 @@
   <div>
     <NavBar/>
     <div class="row mx-auto text-center detailForm">
-      <div class="container DetailBox mt-2">
+      <div class="container DetailBox mt-2" v-bind:style="{fontFamily:font}">
         <div class="row mx-auto">
           <form class="text-center p-10">
             <router-link to="/recipes"
@@ -60,6 +60,7 @@ import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
 export default {
   name: "RecipeDetail",
+   props: ["font"],
   async created() {
     console.log(this.$route.params);
     console.log(this.recipeId);
@@ -71,6 +72,7 @@ export default {
     return {
       recipe: {},
     };
+  
   },
   components: {NavBar},
 
@@ -93,7 +95,6 @@ export default {
 .DetailBox {
   max-width: 700px;
   max-height: 100vh;
-  font-family: "Oswald", sans-serif;
   font-weight: bold;
   border-radius: 25px;
   border: 2px solid rgb(17, 97, 73);

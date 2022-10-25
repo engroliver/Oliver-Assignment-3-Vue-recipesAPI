@@ -1,6 +1,6 @@
 A<template>
   <div>
-    <HomePage v-if="this.$router === '/recipes'" />
+    <HomePage v-if="this.$router === '/recipes'"  />
     <RecipeDetail v-if="this.$router === '/Rdetail/:recipeId'" />
     <NavBar
       v-if="
@@ -9,10 +9,10 @@ A<template>
         this.$router === '/RecipeEdit/:recipeId'
       "
     />
-    <AddRecipe v-if="this.$router === '/add'" titlePage="UPDATE RECIPE" />
+    <AddRecipe v-if="this.$router === '/add'"  />
     <LogIn v-if="this.$router === '/'" />
-    <EditRecipe v-if="this.$router === '/Rdetail/:recipeId'" title-page="UPDATE RECIPE"/>
-    <router-view></router-view>
+    <EditRecipe v-if="this.$router === '/Rdetail/:recipeId'" UpdateTitle ="Update Recipe"/>
+    <router-view font='"Oswald", sans-serif'></router-view>
   </div>
 </template>
 
@@ -28,7 +28,9 @@ export default {
   name: "App",
 
   data: function () {
-    return {};
+    return {
+
+    };
   },
   components: {
     HomePage,
@@ -44,6 +46,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+
 .form {
   width: 15%;
   height: 100vh;

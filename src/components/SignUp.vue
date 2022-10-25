@@ -16,18 +16,21 @@
               v-on:click="close"
             ></button>
             <h3>Create your account</h3>
+            <p v-if="error === 'name'" class="error">Name to Short</p>
             <input
               type="text"
               class="form-control mt-1"
               v-model="FirstName"
               placeholder="First name"
             />
+            <p v-if="error === 'surename'" class="error">Surename too short</p>
             <input
               type="text"
               class="form-control mt-2"
               v-model="SurName"
               placeholder="Surname"
             />
+            <p v-if="error === 'email'" class="error">invalid email adress</p>
             <input
               type="email"
               class="form-control mt-2"
@@ -36,18 +39,22 @@
               aria-describedby="emailHelp"
               placeholder="email-add"
             />
+            
             <input
               type="date"
               class="form-control mt-2"
               data-date-format="yyyy-mm-dd"
               v-model="BirthDate"
             />
+            <p v-if="error === 'username'" class="error">invalid username</p>
             <input
               type="text"
               class="form-control mt-2"
               v-model="UserNameSignup"
               placeholder="Username"
             />
+            
+            <p v-if="error === 'password'" class="error">invalid password</p>
             <input
               type="password"
               class="form-control mt-2"
@@ -86,12 +93,17 @@ export default {
       BirthDate: "",
       UserNameSignup: "",
       PasswordSignup: "",
+      error:[]
     };
   },
   methods: {
       close() {
       this.$emit("closeSignUpBox")
     },
+      validateForm(){
+    
+      },
+
 
     async RegisterAccount() {
       const addAcount = {
@@ -102,11 +114,30 @@ export default {
         username: this.UserNameSignup,
         password: this.PasswordSignup,
       };
-      try {
+        //    if (!this.FirstName){
+        //     this.error.push("name");
+        // }
+        // if(!this.SurName){
+        //   this.error.push("surename");
+        // }
+        // if(!this.email){
+        //     this.error.push("email");
+        // }
+
+        // if(!this.UserNameSignup){
+        //   this.error.push("username");
+        // }
+        // if(!this.PasswordSignup){
+        //   this.error.push("password");
+        // }else if (this.error =""){}
+                try {
         await axios.post(baseAPIUrl + "/register", addAcount);
       } catch (e) {
         alert("Registration Failed");
       }
+        
+       
+
     },
   },
 };
@@ -141,12 +172,17 @@ export default {
   background-color: white;
   border-width: 5px;
   text-align: center;
+  max-height: 600px;
+ 
 }
 .closeBtn {
   top: 0;
   position: relative;
   font-size: 20px;
   margin-left: 250px;
+}
+.error{
+  color:red
 }
 
 </style>

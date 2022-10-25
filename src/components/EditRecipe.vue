@@ -2,7 +2,7 @@
   <div>
     <NavBar />
     <div class="row mx-auto text-center shareForm">
-      <div id="share" class="container mt-3">
+      <div id="share" class="container mt-3" v-bind:style="{fontFamily:font}">
         <div class="row my-5 mx-auto">
           <form class="text-center p-10">
             <h2 class="shareTitle">UPDATE RECIPE</h2>
@@ -145,9 +145,7 @@ import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
 export default {
   name: "EditRecipe",
-  props: {
-    msg: String,
-  },
+  props:['font'],
   async created() {
     const response = await axios.get(
       baseAPIUrl + "/recipes/" + this.$route.params.recipeId
@@ -191,10 +189,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+
 #share {
   max-width: 600px;
-  font-family: "Oswald", sans-serif;
   font-weight: bold;
   border-radius: 25px;
   border: 2px solid rgb(17, 97, 73);

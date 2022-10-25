@@ -28,13 +28,13 @@
             <li class="nav-item">
               <router-link to="/recipes"
                 ><a class="nav-link active navLink" aria-current="page" href="#"
-                  >Home</a
+                  >HOME</a
                 ></router-link
               >
             </li>
             <li class="nav-item">
               <router-link to="/add"
-                ><a class="nav-link active navLink">Addrecipe</a></router-link
+                ><a class="nav-link active navLink">ADD RECIPE</a></router-link
               >
             </li>
           </ul>
@@ -49,9 +49,7 @@
 <script>
 export default {
   name: "NavBar",
-  props: {
-    msg: String,
-  },
+  props: [],
   methods: {
     addPage() {
       this.$emit("AddPage");
