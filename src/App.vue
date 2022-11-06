@@ -13,6 +13,7 @@ A<template>
     <LogIn v-if="this.$router === '/'" />
     <EditRecipe v-if="this.$router === '/Rdetail/:recipeId'" UpdateTitle ="Update Recipe"/>
     <router-view font='"Oswald", sans-serif'></router-view>
+    
   </div>
 </template>
 

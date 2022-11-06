@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar/>
+    <NavBar />
     <div class="row mx-auto text-center shareForm">
       <div id="share" class="container mt-3">
         <div class="row my-5 mx-auto">
@@ -124,8 +124,12 @@
             </div>
             <div class="mb-2">
               <label class="form-label">Upload Image</label>
-              <Uploadcare publicKey="0776c9a63bf7b1c0aca0" v-on:success="addToDataBase" @error="onError">
-              <button >Upload Image</button>
+              <Uploadcare
+                publicKey="0776c9a63bf7b1c0aca0"
+                v-on:success="addToDataBase"
+                @error="onError"
+              >
+                <button>Upload Image</button>
               </Uploadcare>
             </div>
             <button
@@ -142,7 +146,7 @@
 </template>
 
 <script>
-// import Uploadcare from 'uploadcare-vue'
+// import Uploadcare from "uploadcare-vue";
 import NavBar from "./NavBar.vue";
 import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
@@ -164,10 +168,9 @@ export default {
       totalTime: "",
       servings: Number(""),
       cost: Number(""),
-      "pagetitle":"sah"
     };
   },
-  components: { NavBar },
+  components: { NavBar, },
   methods: {
     async addToDataBase(params) {
       const addRecipeData = {

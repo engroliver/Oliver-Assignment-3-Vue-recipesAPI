@@ -89,6 +89,7 @@ export default {
   SignUp
    
   },
+  
   methods: {
     signPage() {
       this.SignBox = "on";

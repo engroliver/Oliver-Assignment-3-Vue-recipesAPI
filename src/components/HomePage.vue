@@ -75,12 +75,12 @@
                       <select
                         class="form-select"
                         aria-label="Default select example"
-                        v-model="recipe_cost"
+                        v-model="recipeCost"
                       >
-                        <option value="" disabled>preferred cost</option>
-                        <option value="250">P250 or lesser</option>
-                        <option value="500">P500 or lesser</option>
-                        <option value="1000">P1000 or lesser</option>
+                        <option value="" >preferred cost</option>
+                        <option value=250>P250 or lesser</option>
+                        <option value=500>P500 or lesser</option>
+                        <option value=1000>P1000 or lesser</option>
                       </select>
                     </div>
                   </form>
@@ -126,42 +126,62 @@ export default {
     return {
       recipes: [],
       FoodName: "",
-      BreakFast: "BreakFast",
+      BreakFast: "Breakfast Meal",
       MainCourse: "Main Course",
       Dessert: "Dessert",
-      recipe_cost: "",
+      recipeCost: "",
     };
   },
+
   computed: {
-    // searchResults() {
-    //   return this.recipes.filter(
-    //     (r) =>
-    //       r.title.toLowerCase().includes(this.FoodName.toLowerCase()) 
-            
-    //     );
-      
-    // },
-        searchResults() {
-      
+
+
+    searchResults() {
       return this.recipes.filter((r) => {
+       
         if (r.title.toLowerCase().includes(this.FoodName.toLowerCase())) {
           return true;
-        } 
-        if (r.cost <= this.recipe_cost){
-          return true;
-        }else{
-            return false;
         }
+        if (Number(r.cost) <= Number(this.recipe_cost)) {
+          return true;
+        }
+        if (
+          r.course.toLowerCase().includes(this.BreakFast.toLowerCase()) ||
+          r.course.toLowerCase().includes(this.MainCourse.toLowerCase()) ||
+          r.course.toLowerCase().includes(this.Dessert.toLowerCase())
+        ) {
+          return true;
+        } 
       });
-      
     },
+
+    //     filterRecipe() {
+    //   let filtered = this.recipes.filter((r)=>{
+    //      r.title.toLowerCase().includes(this.FoodName.toLowerCase())
+        
+    //   });
+    //   filtered = filtered.filter((r)=>{
+    //     return Number(r.cost) <= Number((this.recipeCost))
+    //   });
+    //   filtered = filtered.filter((r)=>{
+    //     return  r.course.includes(this.BreakFast) ||
+    //       r.course.includes(this.MainCourse) ||
+    //       r.course.includes(this.Dessert)
+    //   });
+    //   return filtered;
+    // },
+    // searchResults() {
+    //   return this.filterRecipe
+    //   }
+
+
+  
   },
   components: { NavBar },
   methods: {},
   async created() {
     const response = await axios.get(baseAPIUrl + "/recipes");
     this.recipes = response.data;
-    console.log(response.data);
   },
 };
 </script>

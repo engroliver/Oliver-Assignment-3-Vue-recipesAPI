@@ -16,21 +16,21 @@
               v-on:click="close"
             ></button>
             <h3>Create your account</h3>
-            <p v-if="error === 'name'" class="error">Name to Short</p>
+            <div v-if="valFirstnameok === 'false'" class="error">PlEASE PROVIDE NAME</div>
             <input
               type="text"
               class="form-control mt-1"
               v-model="FirstName"
               placeholder="First name"
             />
-            <p v-if="error === 'surename'" class="error">Surename too short</p>
+            <div v-if="error === 'surename'" class="error">Surename too short</div>
             <input
               type="text"
               class="form-control mt-2"
               v-model="SurName"
               placeholder="Surname"
             />
-            <p v-if="error === 'email'" class="error">invalid email adress</p>
+            <div v-if="error === 'email'" class="error">invalid email adress</div>
             <input
               type="email"
               class="form-control mt-2"
@@ -46,7 +46,7 @@
               data-date-format="yyyy-mm-dd"
               v-model="BirthDate"
             />
-            <p v-if="error === 'username'" class="error">invalid username</p>
+            <div v-if="error === 'username'" class="error">invalid username</div>
             <input
               type="text"
               class="form-control mt-2"
@@ -54,7 +54,7 @@
               placeholder="Username"
             />
             
-            <p v-if="error === 'password'" class="error">invalid password</p>
+            <div v-if="error === 'password'" class="error">invalid password</div>
             <input
               type="password"
               class="form-control mt-2"
@@ -85,8 +85,6 @@ export default {
   props: ["fontstyle"],
   data: function () {
     return {
-      userName: "",
-      password: "",
       FirstName: "",
       SurName: "",
       email: "",
@@ -95,6 +93,16 @@ export default {
       PasswordSignup: "",
       error:[]
     };
+  },
+  computed:{
+    valFirstnameOk: function () {
+      if (this.FirstName.length >= 7) {
+        return true;
+      } else {
+        return false;
+      }
+
+  },
   },
   methods: {
       close() {
