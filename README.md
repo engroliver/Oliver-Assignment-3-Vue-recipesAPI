@@ -19,6 +19,27 @@ the database can be accessed [here](https://engroliver.github.io/Oliver-Assignme
 
 To provide an convenient way to discover, find and monitor their callorie intakes while exploring filipino culture with their exotic food. At the comfort of their own home they do not need to go to philippines anymore to try and taste filipino delicacies.
 
+ ## UIUX
+ 
+  ### Identifying user stories
+  1. User that wants to try different delicacies of other country<br>
+  2. User that would love to share knowledge about cooking. <br> 
+  
+  ###  Acceptance criteria
+  1. The web application allows user to share recipe. <br>
+  2. The web application allows filtering of recipe to find their taste <br>
+  3. The web application ensures that the updating and information of recipe will be shown clearly and friendly to access.
+ 
+ ### Visual Insperation
+At the start of the project, I had been searching Filipino food images to get my inspiration. I love having a modern clean simple color palette and layouts for the theme of the web application
+ ### Colours
+Looking at from my background mostly green was the color of herbs and spices used to cook the food, it is also soothing and clean looking. 
+
+### Wireframes
+[Here](/ui-ux-pdf/uiux.pdf) are the wireframe for the website. background are and styles are not yet finalized.
+
+
+
 ### FEATURES
 
 * Add new recipe to the data by /recipes/add
@@ -40,7 +61,7 @@ To provide an convenient way to discover, find and monitor their callorie intake
 ### Limitations & Bugs
 1. I tried to pud upload-care features to have some picture data in mongodb unfortunetly errors show.
 
-2. I tried to put 3 type of filter by searchbar,checkbos and dropdown but unfortunetly only searchbar works.
+2. I tried to put 3 type of filter by searchbar,checkbox and dropdown but unfortunetly only searchbar works.
 
 3. tried to put form validation in addrecipe,login and signup before submitting form but failed to correct errors. 
 
