@@ -50,7 +50,6 @@ export default {
   props: [],
   data: function () {
     return {
-      visible: false,
        show: true
     };
   },

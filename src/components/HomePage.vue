@@ -95,6 +95,7 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">{{ r.title }}</h5>
+                   <!-- <img src="{{}}" class="card-img-top" alt="..."> -->
                   <p class="card-text">{{ r.description }}</p>
                   <p class="card-text">Course:{{ r.course }}</p>
                   <p class="card-text">Cost php:{{ r.cost }}</p>
@@ -138,20 +139,20 @@ export default {
 
     searchResults() {
       return this.recipes.filter((r) => {
-       
+       console.log(r)
         if (r.title.toLowerCase().includes(this.FoodName.toLowerCase())) {
           return true;
         }
-        if (Number(r.cost) <= Number(this.recipe_cost)) {
-          return true;
-        }
-        if (
-          r.course.toLowerCase().includes(this.BreakFast.toLowerCase()) ||
-          r.course.toLowerCase().includes(this.MainCourse.toLowerCase()) ||
-          r.course.toLowerCase().includes(this.Dessert.toLowerCase())
-        ) {
-          return true;
-        } 
+        //   return true;
+        // }
+        // if (
+        //   r.course.toLowerCase().includes(this.BreakFast.toLowerCase()) ||
+        //   r.course.toLowerCase().includes(this.MainCourse.toLowerCase()) ||
+        //   r.course.toLowerCase().includes(this.Dessert.toLowerCase())
+        // ) {
+        //   return true;
+        // }       // if (Number(r.cost) <= Number(this.recipe_cost)) {
+  
       });
     },
 

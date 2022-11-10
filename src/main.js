@@ -1,17 +1,23 @@
-import { createApp } from 'vue'
-import {createRouter, createWebHistory} from 'vue-router'
 
+import Vue from "vue";
 import App from './App.vue'
+import Router from "vue-router";
+
+
+
 import "bootstrap/dist/css/bootstrap.css"
-import VueToastr from "vue-toastr";
 import HomePage from './components/HomePage.vue'
 import AddRecipe from './components/AddRecipe.vue'
 import LogIn from './components/LogIn.vue'
 import RecipeDetail from './components/RecipeDetail'
 import EditRecipe from './components/EditRecipe'
 
-const router = createRouter({
-    history: createWebHistory(),
+Vue.config.productionTip = false
+
+Vue.use(Router);
+
+const router = new Router({
+    mode: 'history',
     routes:[
 
         {
@@ -45,5 +51,7 @@ const router = createRouter({
 })
 
 
-
-createApp(App).use(router, VueToastr).mount('#app')
+new Vue({
+    router: router,
+    render: (h) => h(App)
+}).$mount("#app");

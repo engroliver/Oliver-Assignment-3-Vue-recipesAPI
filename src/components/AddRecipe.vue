@@ -129,7 +129,7 @@
                 v-on:success="addToDataBase"
                 @error="onError"
               >
-                <button>Upload Image</button>
+                <button class="btn btn-success  mt-3">Upload Image</button>
               </Uploadcare>
             </div>
             <button
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-// import Uploadcare from "uploadcare-vue";
+import Uploadcare from "uploadcare-vue";
 import NavBar from "./NavBar.vue";
 import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
@@ -170,7 +170,7 @@ export default {
       cost: Number(""),
     };
   },
-  components: { NavBar, },
+  components: { NavBar,Uploadcare },
   methods: {
     async addToDataBase(params) {
       const addRecipeData = {
