@@ -127,7 +127,7 @@
               <Uploadcare
                 publicKey="0776c9a63bf7b1c0aca0"
                 v-on:success="addToDataBase"
-                @error="onError"
+                
               >
                 <button class="btn btn-success  mt-3">Upload Image</button>
               </Uploadcare>
@@ -173,6 +173,7 @@ export default {
   components: { NavBar,Uploadcare },
   methods: {
     async addToDataBase(params) {
+      
       const addRecipeData = {
         title: this.title,
         description: this.description,

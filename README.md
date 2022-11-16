@@ -59,11 +59,9 @@ Looking at from my background mostly green was the color of herbs and spices use
 * Login account
 
 ### Limitations & Bugs
-1. I tried to pud upload-care features to have some picture data in mongodb unfortunetly errors show.
+1. I tried to put 3 type of filter by searchbar,checkbox and dropdown but unfortunetly only searchbar works.
 
-2. I tried to put 3 type of filter by searchbar,checkbox and dropdown but unfortunetly only searchbar works.
-
-3. tried to put form validation in addrecipe,login and signup before submitting form but failed to correct errors. 
+2. tried to put form validation in addrecipe,login and signup before submitting form but failed to correct errors. 
 
 ### Features pending implementing
 1. Could someday put add to favorite feature and display on profile tab

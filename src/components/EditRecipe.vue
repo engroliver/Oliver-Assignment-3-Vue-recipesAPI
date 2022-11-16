@@ -124,9 +124,9 @@
             </div>
             <div class="mb-2">
               <label class="form-label">Upload Image</label>
-              <!-- <Uploadcare publicKey="0776c9a63bf7b1c0aca0" v-on:success="addToDataBase" @error="onError"> -->
+              <Uploadcare publicKey="0776c9a63bf7b1c0aca0" v-on:success="UpdateDataBase" >
               <button class="btn btn-success btn-sm">Import</button>
-              <!-- </Uploadcare> -->
+              </Uploadcare>
             </div>
             <button v-on:click="UpdateDataBase" class="btn btn-success" >
               UPDATE
@@ -139,7 +139,7 @@
 </template>
 
 <script>
-// import Uploadcare from "uploadcare-vue";
+import Uploadcare from "uploadcare-vue";
 import NavBar from "./NavBar.vue";
 import axios from "axios";
 const baseAPIUrl = "http://localhost:3000";
@@ -151,18 +151,18 @@ export default {
       baseAPIUrl + "/recipes/" + this.$route.params.recipeId
     );
     this.recipe = response.data;
-    console.log(response.data);
+    
   },
   data: function () {
     return {
       recipe: {},
     };
   },
-  components: { NavBar },
+  components: { NavBar,Uploadcare },
 
   methods: {
-    async UpdateDataBase(event) {
-      event.preventDefault();
+    async UpdateDataBase(params) {
+     
       const NewRecipeData = {
         title: this.recipe.title,
         description: this.recipe.description,
@@ -175,6 +175,8 @@ export default {
         total_time: this.recipe.total_time,
         servings: this.recipe.servings,
         cost: this.recipe.cost,
+       name: params.name,
+        url: params.cdnUrl,
       };
       await axios.put(
         baseAPIUrl + "/recipes/" + this.$route.params.recipeId,
