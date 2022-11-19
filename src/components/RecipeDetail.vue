@@ -13,6 +13,7 @@
               ></button
             ></router-link>
             <h3 class="p-2 bg-light border">{{ recipe.title }}</h3>
+            <img :src="recipe.url" class="card-img-top" height=400px width=200px  > 
             <p>{{ recipe.description }}</p>
             <ul class="list-group mb-3">
               <h3 class="p-2 bg-light border">Ingredients</h3>
@@ -67,6 +68,7 @@ export default {
     const recipeId = this.$route.params.recipeId;
     const response = await axios.get(baseAPIUrl + "/recipes/" + recipeId);
     this.recipe = response.data;
+    console.log(response.data)
   },
   data: function () {
     return {

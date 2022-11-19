@@ -36,7 +36,6 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                         
                           id="flexCheckDefault"
                           v-model="BreakFast"
                         />
@@ -48,7 +47,6 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                        
                           id="flexCheckChecked"
                           checked
                           v-model="MainCourse"
@@ -61,7 +59,6 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                         
                           id="flexCheckChecked"
                           checked
                           v-model="Dessert"
@@ -77,7 +74,7 @@
                         aria-label="Default select example"
                         v-model="recipeCost"
                       >
-                        <option value="" >preferred cost</option>
+                        <option value="">preferred cost</option>
                         <option value=250>P250 or lesser</option>
                         <option value=500>P500 or lesser</option>
                         <option value=1000>P1000 or lesser</option>
@@ -95,7 +92,12 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">{{ r.title }}</h5>
-                   <img :src="r.url" class="card-img-top" height=400px width=200px  > 
+                  <img
+                    :src="r.url"
+                    class="card-img-top"
+                    height="400px"
+                    width="200px"
+                  />
                   <p class="card-text">{{ r.description }}</p>
                   <p class="card-text">Course:{{ r.course }}</p>
                   <p class="card-text">Cost php:{{ r.cost }}</p>
@@ -135,57 +137,56 @@ export default {
   },
 
   computed: {
-
-
     searchResults() {
-      return this.recipes.filter((r) => {
-      
-        if (r.title.toLowerCase().includes(this.FoodName.toLowerCase())) {
+      return this.recipes
+        .filter((r) => {
+          if (r.title) {
+            return r.title.toLowerCase().includes(this.FoodName.toLowerCase());
+          }
           return true;
-        }
-
-
-        // if (
-        //   r.course.toLowerCase().includes(this.BreakFast.toLowerCase()) ||
-        //   r.course.toLowerCase().includes(this.MainCourse.toLowerCase()) ||
-        //   r.course.toLowerCase().includes(this.Dessert.toLowerCase())
-        // ) {
-        //   return true;
-        // } if (Number(r.cost) <= Number(this.recipe_cost)) {
-        //   return true;
-        //   }
-  
-      });
+        })
+        .filter((r) => {
+          console.log(r)
+          if (this.BreakFast && this.Dessert && this.MainCourse) {
+            return r.course
+              .includes("Dessert") ||
+              r.course.includes("Breakfast Meal") ||
+              r.course.includes("Main Course");
+          }
+          if (this.MainCourse && this.BreakFast) {
+            return r.course.includes("Breakfast Meal") || r.course.includes("Main Course");
+          }
+          if (this.MainCourse && this.Dessert) {
+            return r.course.includes("Dessert") || r.course.includes("Main Course");
+          }
+          if (this.BreakFast && this.Dessert) {
+            return r.course.includes("Dessert") || r.course.includes("Breakfast Meal");
+          }
+          if (this.BreakFast) {
+            return r.course.includes("Breakfast Meal");
+          }
+          if (this.MainCourse) {
+            return r.course.includes("Main Course");
+          }
+          if (this.Dessert) {
+            return r.course.includes("Dessert");
+          }
+          return true;
+        })
+        .filter((r) => {
+          if (this.recipeCost != "" ) {
+            return Number(r.cost) <= this.recipeCost;
+          }
+          return true;
+        });
     },
-
-    //     filterRecipe() {
-    //   let filtered = this.recipes.filter((r)=>{
-    //      r.title.toLowerCase().includes(this.FoodName.toLowerCase())
-        
-    //   });
-    //   filtered = filtered.filter((r)=>{
-    //     return Number(r.cost) <= Number((this.recipeCost))
-    //   });
-    //   filtered = filtered.filter((r)=>{
-    //     return  r.course.includes(this.BreakFast) ||
-    //       r.course.includes(this.MainCourse) ||
-    //       r.course.includes(this.Dessert)
-    //   });
-    //   return filtered;
-    // },
-    // searchResults() {
-    //   return this.filterRecipe
-    //   }
-
-
-  
   },
   components: { NavBar },
   methods: {},
   async created() {
     const response = await axios.get(baseAPIUrl + "/recipes");
     this.recipes = response.data;
-   
+  
   },
 };
 </script>

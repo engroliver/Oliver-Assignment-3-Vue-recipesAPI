@@ -161,7 +161,7 @@ export default {
   components: { NavBar,Uploadcare },
 
   methods: {
-    async UpdateDataBase(params) {
+    async UpdateDataBase( params) {
      
       const NewRecipeData = {
         title: this.recipe.title,

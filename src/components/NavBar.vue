@@ -54,12 +54,7 @@ export default {
     };
   },
   methods: {
-    addPage() {
-      this.$emit("AddPage");
-    },
-    homePage() {
-      this.$emit("mainPage");
-    },
+
     toggleNavbar() {
       this.show = !this.show
     }
