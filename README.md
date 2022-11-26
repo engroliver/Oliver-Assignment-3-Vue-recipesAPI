@@ -101,4 +101,8 @@ Looking at from my background mostly green was the color of herbs and spices use
 ### CREDITS
 1. https://panlasangpinoy.com
 
-    -Recipe Source for the project
+    - Recipe Source for the project
+
+### GUIDANCE
+ - shun and john benedict for being a great TAs
+

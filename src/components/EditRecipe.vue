@@ -2,9 +2,20 @@
   <div>
     <NavBar />
     <div class="row mx-auto text-center shareForm">
-      <div id="share" class="container mt-3" v-bind:style="{fontFamily:font}">
+      <div
+        id="share"
+        class="container mt-3"
+        v-bind:style="{ fontFamily: font }"
+      >
         <div class="row my-5 mx-auto">
           <form class="text-center p-10">
+            <router-link to="/recipes"
+              ><button
+                type="button"
+                class="btn-close closeBtn"
+                aria-label="Close"
+              ></button
+            ></router-link>
             <h2 class="shareTitle">UPDATE RECIPE</h2>
             <div class="mb-2">
               <div class="errordiv"></div>
@@ -13,7 +24,7 @@
                 id="name"
                 type="text"
                 class="form-control form-control-sm"
-                v-model="recipe.title"
+                v-model="title"
               />
             </div>
             <div class="mb-2">
@@ -22,7 +33,7 @@
                 class="form-control form-control-sm"
                 id="discription"
                 rows="3"
-                v-model="recipe.description"
+                v-model="description"
               ></textarea>
             </div>
             <div class="mb-2">
@@ -32,7 +43,7 @@
                 id="course"
                 type="text"
                 class="form-control form-control-sm"
-                v-model="recipe.course"
+                v-model="course"
               />
             </div>
             <div class="errordiv"></div>
@@ -44,7 +55,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 rows="3"
-                v-model="recipe.ingredients"
+                v-model="ingredients"
               ></textarea>
             </div>
             <div class="errordiv"></div>
@@ -56,7 +67,7 @@
                 placeholder="enter instruction step by step seprated by comma"
                 class="form-control form-control-sm"
                 rows="3"
-                v-model="recipe.instructions"
+                v-model="instructions"
               ></textarea>
             </div>
             <div class="errordiv"></div>
@@ -66,7 +77,7 @@
                 id="nutriFacts"
                 type="text"
                 class="form-control form-control-sm"
-                v-model="recipe.nutrition_facts"
+                v-model="nutrition_facts"
               />
             </div>
             <div class="errordiv"></div>
@@ -76,7 +87,7 @@
                 id="prep_time"
                 type="text"
                 class="form-control form-control-sm"
-                v-model="recipe.prep_time"
+                v-model="prep_time"
               />
             </div>
             <div class="errordiv"></div>
@@ -86,7 +97,7 @@
                 id="cook_time"
                 type="text"
                 class="form-control form-control-sm"
-                v-model="recipe.cook_time"
+                v-model="cook_time"
               />
             </div>
             <div class="errordiv"></div>
@@ -96,7 +107,7 @@
                 id="total_time"
                 type="text"
                 class="form-control form-control-sm"
-                v-model="recipe.total_time"
+                v-model="total_time"
               />
             </div>
             <div class="errordiv"></div>
@@ -108,7 +119,7 @@
                 min="1"
                 max="100"
                 class="form-control form-control-sm"
-                v-model="recipe.servings"
+                v-model="servings"
               />
             </div>
             <div class="errordiv"></div>
@@ -119,16 +130,19 @@
                 min="1"
                 type="number"
                 class="form-control form-control-sm"
-                v-model="recipe.cost"
+                v-model="cost"
               />
             </div>
             <div class="mb-2">
               <label class="form-label">Upload Image</label>
-              <Uploadcare publicKey="0776c9a63bf7b1c0aca0" v-on:success="UpdateDataBase" >
-              <button class="btn btn-success btn-sm">Import</button>
+              <Uploadcare
+                publicKey="0776c9a63bf7b1c0aca0"
+                v-on:success="UpdateDataBase"
+              >
+                <button class="btn btn-success btn-sm">Import</button>
               </Uploadcare>
             </div>
-            <button v-on:click="UpdateDataBase" class="btn btn-success" >
+            <button v-on:click="UpdateDataBase" class="btn btn-success">
               UPDATE
             </button>
           </form>
@@ -151,11 +165,35 @@ export default {
       baseAPIUrl + "/recipes/" + this.$route.params.recipeId
     );
     this.recipe = response.data;
+    this.title = response.data.title
+     this.description = response.data.description
+     this.course = response.data.course,
+    this.ingredients = response.data.ingredients.join("|"),
+    this.instructions = response.data.instructions.join("|"),
+    this.nutrition_facts = response.data.nutrition_facts.join("|"),
+     this.prep_time = response.data.prep_time,
+      this.cook_time = response.data.cook_time,
+        this.total_time = response.data.total_time,
+        this.servings = response.data.servings,
+        this.cost = response.data.cost
     
   },
   data: function () {
+   
+
     return {
-      recipe: {},
+      
+      title: "",
+      description: "",
+      course: "",
+      ingredients: "",
+      instructions: "",
+      nutrition_facts: "",
+      prep_time: "",
+      cook_time: "",
+      total_time: "",
+      servings: Number(""),
+      cost: Number(""),
     };
   },
   components: { NavBar,Uploadcare },
@@ -164,17 +202,17 @@ export default {
     async UpdateDataBase( params) {
      
       const NewRecipeData = {
-        title: this.recipe.title,
-        description: this.recipe.description,
-        course: this.recipe.course,
-        ingredients: toString(this.recipe.ingredients).split(",").map((r) => r.trim()),
-        instructions: toString(this.recipe.instructions).split(",").map((r) => r.trim()),
-        nutrition_facts: toString(this.recipe.nutrition_Facts).split(",").map((r) => r.trim()),
-        prep_time: this.recipe.prep_time,
-        cook_time: this.recipe.cook_time,
-        total_time: this.recipe.total_time,
-        servings: this.recipe.servings,
-        cost: this.recipe.cost,
+        title: this.title,
+        description: this.description,
+        course: this.course,
+        ingredients: this.ingredients.split("|").map((r) => r.trim()),
+        instructions: this.instructions.split("|").map((r) => r.trim()),
+        nutrition_facts: this.nutrition_facts.split("|").map((r) => r.trim()),
+        prep_time: this.prep_time,
+        cook_time: this.cook_time,
+        total_time: this.total_time,
+        servings: this.servings,
+        cost: this.cost,
        name: params.name,
         url: params.cdnUrl,
       };
@@ -191,7 +229,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 #share {
   max-width: 600px;
   font-weight: bold;
@@ -215,5 +252,11 @@ export default {
 .shareForm {
   background-image: url("../assets/shareBG.jpg");
   background-size: cover;
+}
+.closeBtn {
+  top: 0;
+  position: relative;
+  font-size: 30px;
+  margin-left: 90%;
 }
 </style>

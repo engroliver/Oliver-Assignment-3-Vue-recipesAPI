@@ -1,17 +1,17 @@
 A<template>
   <div>
-    <HomePage v-if="this.$router === '/recipes'"  />
+   <HomePage v-if="this.$router === '/recipes'"  /> 
     <RecipeDetail v-if="this.$router === '/Rdetail/:recipeId'" />
-    <NavBar
+   <NavBar
       v-if="
         this.$router === '/recipes' ||
         this.$router === '/add' ||
         this.$router === '/RecipeEdit/:recipeId'
       "
-    />
+    /> 
     <AddRecipe v-if="this.$router === '/add'"  />
     <LogIn v-if="this.$router === '/'" />
-    <EditRecipe v-if="this.$router === '/Rdetail/:recipeId'" UpdateTitle ="Update Recipe"/>
+    <EditRecipe v-if="this.$router === '/Rdetail/:recipeId'" UpdateTitle ="Update Recipe"/> 
     <router-view font='"Oswald", sans-serif'></router-view>
     
   </div>

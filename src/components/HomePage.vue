@@ -75,9 +75,9 @@
                         v-model="recipeCost"
                       >
                         <option value="">preferred cost</option>
-                        <option value=250>P250 or lesser</option>
-                        <option value=500>P500 or lesser</option>
-                        <option value=1000>P1000 or lesser</option>
+                        <option value="250">P250 or lesser</option>
+                        <option value="500">P500 or lesser</option>
+                        <option value="1000">P1000 or lesser</option>
                       </select>
                     </div>
                   </form>
@@ -146,21 +146,30 @@ export default {
           return true;
         })
         .filter((r) => {
-          console.log(r)
+          console.log(r);
           if (this.BreakFast && this.Dessert && this.MainCourse) {
-            return r.course
-              .includes("Dessert") ||
+            return (
+              r.course.includes("Dessert") ||
               r.course.includes("Breakfast Meal") ||
-              r.course.includes("Main Course");
+              r.course.includes("Main Course")
+            );
           }
           if (this.MainCourse && this.BreakFast) {
-            return r.course.includes("Breakfast Meal") || r.course.includes("Main Course");
+            return (
+              r.course.includes("Breakfast Meal") ||
+              r.course.includes("Main Course")
+            );
           }
           if (this.MainCourse && this.Dessert) {
-            return r.course.includes("Dessert") || r.course.includes("Main Course");
+            return (
+              r.course.includes("Dessert") || r.course.includes("Main Course")
+            );
           }
           if (this.BreakFast && this.Dessert) {
-            return r.course.includes("Dessert") || r.course.includes("Breakfast Meal");
+            return (
+              r.course.includes("Dessert") ||
+              r.course.includes("Breakfast Meal")
+            );
           }
           if (this.BreakFast) {
             return r.course.includes("Breakfast Meal");
@@ -174,7 +183,7 @@ export default {
           return true;
         })
         .filter((r) => {
-          if (this.recipeCost != "" ) {
+          if (this.recipeCost != "") {
             return Number(r.cost) <= this.recipeCost;
           }
           return true;
@@ -186,7 +195,6 @@ export default {
   async created() {
     const response = await axios.get(baseAPIUrl + "/recipes");
     this.recipes = response.data;
-  
   },
 };
 </script>

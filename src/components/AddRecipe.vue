@@ -40,7 +40,7 @@
               <label class="form-label">Ingredients</label>
               <textarea
                 id="ingredients"
-                placeholder="enter the ingredients seperated by a comma ex.(milk,flour,sugar)"
+                placeholder="enter the ingredients seperated by a vertical pipe, pipe (milk|flour|sugar)"
                 type="text"
                 class="form-control form-control-sm"
                 rows="3"
@@ -53,7 +53,7 @@
               <textarea
                 id="Instruction"
                 type="text"
-                placeholder="enter instruction step by step seprated by comma"
+                placeholder="enter instruction step by step seprated by vertical pipe, pipe (|)"
                 class="form-control form-control-sm"
                 rows="3"
                 v-model="instructions"
@@ -65,6 +65,7 @@
               <input
                 id="nutriFacts"
                 type="text"
+                placeholder="enter nutrition separated by vertical pipe, pipe (|)"
                 class="form-control form-control-sm"
                 v-model="nutriFacts"
               />
@@ -127,9 +128,8 @@
               <Uploadcare
                 publicKey="0776c9a63bf7b1c0aca0"
                 v-on:success="addToDataBase"
-                
               >
-                <button class="btn btn-success  mt-3">Upload Image</button>
+                <button class="btn btn-success mt-3">Upload Image</button>
               </Uploadcare>
             </div>
             <button
@@ -170,17 +170,16 @@ export default {
       cost: Number(""),
     };
   },
-  components: { NavBar,Uploadcare },
+  components: { NavBar, Uploadcare },
   methods: {
     async addToDataBase(params) {
-      
       const addRecipeData = {
         title: this.title,
         description: this.description,
         course: this.course,
-        ingredients: this.ingredients.split(",").map((i) => i.trim()),
-        instructions: this.instructions.split(",").map((i) => i.trim()),
-        nutrition_facts: this.nutriFacts.split(",").map((i) => i.trim()),
+        ingredients: this.ingredients.split("|").map((i) => i.trim()),
+        instructions: this.instructions.split("|").map((i) => i.trim()),
+        nutrition_facts: this.nutriFacts.split("|").map((i) => i.trim()),
         prep_time: this.prepTime,
         cook_time: this.cookTime,
         total_time: this.totalTime,
