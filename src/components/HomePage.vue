@@ -14,7 +14,7 @@
               pt-2
             "
           >
-            <div class="row mx-auto text-center">
+            <div class="row mx-auto text-center  searchCol">
               <div class="container">
                 <div class="row mx-auto">
                   <form class="text-center p-10">
@@ -187,7 +187,7 @@ export default {
             return Number(r.cost) <= this.recipeCost;
           }
           return true;
-        });
+        }) ;
     },
   },
   components: { NavBar },
@@ -212,9 +212,7 @@ export default {
   background-color: rgb(254, 250, 250);
   position: absolute;
 }
-.searchCol {
-  max-width: 250px;
-}
+
 * {
   margin: 0;
   padding: 0;

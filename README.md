@@ -13,7 +13,7 @@ LASANG PINOY API is a mobile responsive website for cooks or ordinary people who
 
 The database goal is to provide the user an easy way to find and share their own recipes by putting ingredients and instruction that other people can access to for them to try also to promote Filipino delicacies.
 
-the database can be accessed [here](https://engroliver.github.io/Oliver-Assignment-1/).
+the database can be accessed [here](https://github.com/engroliver/Assignment-2-oliver-recipes-api/).
 
 ### Justification for the project
 
